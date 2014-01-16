@@ -7,6 +7,7 @@
 
 #include <fmod/fmod.hpp>
 #include <fmod/fmod_errors.h>
+#include <QTimer>
 
 class FMODController : public QWidget
 {
@@ -18,15 +19,27 @@ public:
     enum CONTROLLER2_STATES{
          NONE2 = 300, STOP, DECREASE, INCREASE, START
     };
+    enum SOUND_STATUS{
+        NONE3 = 400, PLAYING, STOPPED
+    };
+
     struct{
         int controller1;
         int controller2;
     }controllerState;
 
+    static const int FREQUENCY_STEP = 5;
     explicit FMODController(QWidget *parent = 0);
     
+    struct SoundController{
+        FMOD::Sound *sound;
+        QTimer *timer;
+        int timeperiod;
+        int status;
+    };
+
     FMOD::System *system;
-    FMOD::Sound *sound1, *sound2, *sound3, *sound4;
+    SoundController sound1, sound2, sound3, sound4;
     FMOD::Channel *channel;
     void loadAudioFiles();
     void ERRCHECK(FMOD_RESULT result);
@@ -39,6 +52,10 @@ public slots:
     void debugSlot(QString message);
     void errorSlot(QString message);
     void controller(int controller1, int controller2);
+    void sound1Timeout();
+    void sound2Timeout();
+    void sound3Timeout();
+    void sound4Timeout();
 
 };
 

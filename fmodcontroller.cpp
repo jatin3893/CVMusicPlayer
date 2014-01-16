@@ -44,22 +44,28 @@ void FMODController::controller(int controller1, int controller2)
             {
             case START:
             {
-                result = system->playSound(FMOD_CHANNEL_FREE, sound1, 0, &channel);
-                ERRCHECK(result);
+                sound1.timer->start(sound1.timeperiod);
             }
                 break;
             case STOP:
             {
+                sound1.timer->stop();
                 emit debugSignal(tr("STOP SOUND 1"));
             }
                 break;
             case INCREASE:
             {
+                sound1.timer->stop();
+                sound1.timeperiod += FREQUENCY_STEP;
+                sound1.timer->start(sound1.timeperiod);
                 emit debugSignal(tr("INCREASE SOUND 1"));
             }
                 break;
             case DECREASE:
             {
+                sound1.timer->stop();
+                sound1.timeperiod -= FREQUENCY_STEP;
+                sound1.timer->start(sound1.timeperiod);
                 emit debugSignal(tr("DECREASE SOUND 1"));
             }
                 break;
@@ -77,22 +83,28 @@ void FMODController::controller(int controller1, int controller2)
             {
             case START:
             {
-                result = system->playSound(FMOD_CHANNEL_FREE, sound2, 0, &channel);
-                ERRCHECK(result);
+                sound2.timer->start(sound2.timeperiod);
             }
                 break;
             case STOP:
             {
+                sound2.timer->stop();
                 emit debugSignal(tr("STOP SOUND 2"));
             }
                 break;
             case INCREASE:
             {
+                sound2.timer->stop();
+                sound2.timeperiod += FREQUENCY_STEP;
+                sound2.timer->start(sound2.timeperiod);
                 emit debugSignal(tr("INCREASE SOUND 2"));
             }
                 break;
             case DECREASE:
             {
+                sound2.timer->stop();
+                sound2.timeperiod -= FREQUENCY_STEP;
+                sound2.timer->start(sound2.timeperiod);
                 emit debugSignal(tr("DECREASE SOUND 2"));
             }
                 break;
@@ -110,22 +122,32 @@ void FMODController::controller(int controller1, int controller2)
             {
             case START:
             {
-                result = system->playSound(FMOD_CHANNEL_FREE, sound3, 0, &channel);
-                ERRCHECK(result);
+                if(!sound3.status == PLAYING)
+                {
+                    sound3.timer->start(sound4.timeperiod);
+                    sound3.status = PLAYING;
+                }
             }
                 break;
             case STOP:
             {
+                sound3.timer->stop();
                 emit debugSignal(tr("STOP SOUND 3"));
             }
                 break;
             case INCREASE:
             {
+                sound3.timer->stop();
+                sound3.timeperiod += FREQUENCY_STEP;
+                sound3.timer->start(sound3.timeperiod);
                 emit debugSignal(tr("INCREASE SOUND 3"));
             }
                 break;
             case DECREASE:
             {
+                sound3.timer->stop();
+                sound3.timeperiod -= FREQUENCY_STEP;
+                sound3.timer->start(sound3.timeperiod);
                 emit debugSignal(tr("DECREASE SOUND 3"));
             }
                 break;
@@ -143,22 +165,33 @@ void FMODController::controller(int controller1, int controller2)
             {
             case START:
             {
-                result = system->playSound(FMOD_CHANNEL_FREE, sound4, 0, &channel);
-                ERRCHECK(result);
+                if(!sound4.status == PLAYING)
+                {
+                    sound4.timer->start(sound4.timeperiod);
+                    sound4.status = PLAYING;
+                }
             }
                 break;
             case STOP:
             {
+                sound4.timer->stop();
+                sound4.status = STOPPED;
                 emit debugSignal(tr("STOP SOUND 4"));
             }
                 break;
             case INCREASE:
             {
+                sound4.timer->stop();
+                sound4.timeperiod += FREQUENCY_STEP;
+                sound4.timer->start(sound4.timeperiod);
                 emit debugSignal(tr("INCREASE SOUND 4"));
             }
                 break;
             case DECREASE:
             {
+                sound4.timer->stop();
+                sound4.timeperiod -= FREQUENCY_STEP;
+                sound4.timer->start(sound4.timeperiod);
                 emit debugSignal(tr("DECREASE SOUND 4"));
             }
                 break;
@@ -176,7 +209,7 @@ void FMODController::controller(int controller1, int controller2)
             {
             case START:
             {
-                result = system->playSound(FMOD_CHANNEL_FREE, sound4, 0, &channel);
+                result = system->playSound(FMOD_CHANNEL_FREE, sound4.sound, 0, &channel);
                 ERRCHECK(result);
             }
                 break;
@@ -209,12 +242,13 @@ void FMODController::controller(int controller1, int controller2)
             {
             case START:
             {
-                result = system->playSound(FMOD_CHANNEL_FREE, sound4, 0, &channel);
+                result = system->playSound(FMOD_CHANNEL_FREE, sound4.sound, 0, &channel);
                 ERRCHECK(result);
             }
                 break;
             case STOP:
             {
+
                 emit debugSignal(tr("STOP SOUND 6"));
             }
                 break;
@@ -251,25 +285,37 @@ void FMODController::loadAudioFiles()
 {
     FMOD_RESULT result;
 
-    result = system->createSound("audio/1.wav", FMOD_SOFTWARE, 0, &sound1);
+    result = system->createSound("audio/1.wav", FMOD_SOFTWARE, 0, &(sound1.sound));
     ERRCHECK(result);
-    result = sound1->setMode(FMOD_LOOP_OFF);
+    result = sound1.sound->setMode(FMOD_LOOP_OFF);
     ERRCHECK(result);
+    sound1.timer = new QTimer();
+    sound1.timeperiod = 1000;
+    connect(sound1.timer, SIGNAL(timeout()), this, SLOT(sound1Timeout()));
 
-    result = system->createSound("audio/2.wav", FMOD_SOFTWARE, 0, &sound2);
+    result = system->createSound("audio/2.wav", FMOD_SOFTWARE, 0, &(sound2.sound));
     ERRCHECK(result);
-    result = sound2->setMode(FMOD_LOOP_OFF);
+    result = sound2.sound->setMode(FMOD_LOOP_OFF);
     ERRCHECK(result);
+    sound2.timer = new QTimer();
+    sound2.timeperiod = 1000;
+    connect(sound2.timer, SIGNAL(timeout()), this, SLOT(sound2Timeout()));
 
-    result = system->createSound("audio/3.wav", FMOD_SOFTWARE, 0, &sound3);
+    result = system->createSound("audio/3.wav", FMOD_SOFTWARE, 0, &(sound3.sound));
     ERRCHECK(result);
-    result = sound3->setMode(FMOD_LOOP_OFF);
+    result = sound3.sound->setMode(FMOD_LOOP_OFF);
     ERRCHECK(result);
+    sound3.timer = new QTimer();
+    sound3.timeperiod = 1000;
+    connect(sound3.timer, SIGNAL(timeout()), this, SLOT(sound3Timeout()));
 
-    result = system->createSound("audio/8.wav", FMOD_SOFTWARE, 0, &sound4);
+    result = system->createSound("audio/8.wav", FMOD_SOFTWARE, 0, &(sound4.sound));
     ERRCHECK(result);
-    result = sound4->setMode(FMOD_LOOP_OFF);
+    result = sound4.sound->setMode(FMOD_LOOP_OFF);
     ERRCHECK(result);
+    sound4.timer = new QTimer();
+    sound4.timeperiod = 1000;
+    connect(sound4.timer, SIGNAL(timeout()), this, SLOT(sound4Timeout()));
 }
 
 void FMODController::ERRCHECK(FMOD_RESULT result)
@@ -288,4 +334,36 @@ void FMODController::debugSlot(QString message)
 void FMODController::errorSlot(QString message)
 {
     std::cout << "Error: " << message.toStdString() << std::endl;
+}
+
+void FMODController::sound1Timeout()
+{
+    FMOD_RESULT result;
+    emit debugSignal(tr("Playing Sound 1"));
+    result = system->playSound(FMOD_CHANNEL_FREE, sound1.sound, 0, &channel);
+    ERRCHECK(result);
+}
+
+void FMODController::sound2Timeout()
+{
+    FMOD_RESULT result;
+    emit debugSignal(tr("Playing Sound 2"));
+    result = system->playSound(FMOD_CHANNEL_FREE, sound2.sound, 0, &channel);
+    ERRCHECK(result);
+}
+
+void FMODController::sound3Timeout()
+{
+    FMOD_RESULT result;
+    emit debugSignal(tr("Playing Sound 3"));
+    result = system->playSound(FMOD_CHANNEL_FREE, sound3.sound, 0, &channel);
+    ERRCHECK(result);
+}
+
+void FMODController::sound4Timeout()
+{
+    FMOD_RESULT result;
+    emit debugSignal(tr("Playing Sound 4"));
+    result = system->playSound(FMOD_CHANNEL_FREE, sound4.sound, 0, &channel);
+    ERRCHECK(result);
 }

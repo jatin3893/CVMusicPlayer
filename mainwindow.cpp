@@ -75,8 +75,8 @@ void MainWindow::updateImageWidget(cv::Mat frame)
 
 void MainWindow::calculateGestures(QPoint marker1, QPoint marker2)
 {
-    int controller1;
-    int controller2;
+    int controller1 = NONE1;
+    int controller2 = NONE2;
 
     circle(frame, Point(int(marker1.x()), int(marker1.y())), 3, Scalar(0, 0, 255), -1, 8, 0);
     circle(frame, Point(int(marker2.x()), int(marker2.y())), 3, Scalar(0, 255, 0), -1, 8, 0);
@@ -153,17 +153,24 @@ void MainWindow::updateMarkerPosition(cv::Mat frame)
     if(markerIdentificationMethod == HSV_VALUE)
     {
         Mat threshFrame1, threshFrame2;
+        Mat kernel;
+        int size=3;
         Moments mu;
 
-        int ID1_lowerH = 66, ID1_lowerS = 179, ID1_lowerV = 000;
-        int ID1_upperH = 93, ID1_upperS = 255, ID1_upperV = 255;
+        int ID1_lowerH = 117, ID1_lowerS = 148, ID1_lowerV = 000;
+        int ID1_upperH = 128, ID1_upperS = 255, ID1_upperV = 255;
 
         inRange(hsvFrame, Scalar(ID1_lowerH, ID1_lowerS, ID1_lowerV), Scalar(ID1_upperH, ID1_upperS, ID1_upperV), threshFrame1);
+        kernel = getStructuringElement(MORPH_CROSS, Size(2*size+1, 2*size+1), Point(size, size));
+        erode(threshFrame1, threshFrame1, kernel);
+        dilate(threshFrame1, threshFrame1, kernel);
+        dilate(threshFrame1, threshFrame1, kernel);
+
         mu = moments(threshFrame1);
         QPoint marker1 = QPoint(mu.m10/mu.m00, 480 - mu.m01/mu.m00);
 
-        int ID2_lowerH = 144, ID2_lowerS = 163, ID2_lowerV = 000;
-        int ID2_upperH = 162, ID2_upperS = 255, ID2_upperV = 255;
+        int ID2_lowerH = 000, ID2_lowerS = 221, ID2_lowerV = 000;
+        int ID2_upperH =  28, ID2_upperS = 255, ID2_upperV = 255;
 
         inRange(hsvFrame, Scalar(ID2_lowerH, ID2_lowerS, ID2_lowerV), Scalar(ID2_upperH, ID2_upperS, ID2_upperV), threshFrame2);
         mu = moments(threshFrame2);
