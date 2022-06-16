@@ -1,12 +1,12 @@
 {
 	"info": {
 		"_postman_id": "8a444b7a-5fd8-43b1-b54d-8a27db88730d",
-		"name": "Collection 3",
+		"name": "Collection 4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Sample endpoint: Returns details about a particular user",
+			"name": "Sample endpoint Edited By jatin",
 			"id": "dc6830b0-c7f0-40a0-b1a0-b82a8d6debc9",
 			"request": {
 				"method": "GET",
