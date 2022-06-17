@@ -81,7 +81,7 @@
           "Constant": false,
           "IsStream": false,
           "IsAttribute": false,
-          "Example": "3",
+          "Example": "4",
           "Examples": [],
           "Nullable": false,
           "ReadOnly": false,
@@ -105,7 +105,7 @@
             {
               "IsNull": false,
               "Name": "id",
-              "Value": "3"
+              "Value": "4"
             }
           ],
           "ExpectedStatus": "200",
