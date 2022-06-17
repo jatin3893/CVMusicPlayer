@@ -1,0 +1,264 @@
+{
+  "AuthenticateEndpointsWith": [],
+  "Name": "Testing Shopigram",
+  "BaseUri": "http://example.com/facebook",
+  "ServerConfiguration": {
+    "UseParent": false,
+    "DefaultEnvironment": "production",
+    "DefaultServer": "Server 1",
+    "Environments": [
+      {
+        "Name": "production",
+        "Servers": [
+          {
+            "Name": "Server 1",
+            "Url": "http://example.com/facebook"
+          }
+        ]
+      }
+    ],
+    "Parameters": []
+  },
+  "Version": "1.0",
+  "Contact": {},
+  "AdditionalHeaders": [],
+  "Authentication": {
+    "Type": "None",
+    "AuthType": "None",
+    "Parameters": [],
+    "Scopes": [],
+    "ParamFormats": {}
+  },
+  "AuthenticationSchemes": {},
+  "Endpoints": [
+    {
+      "AuthenticateEndpointWith": [],
+      "Name": "Test Facebook Webhook",
+      "HTTPMethod": "GET",
+      "Group": "Misc",
+      "RequiresAuthentication": true,
+      "Route": "/webhook",
+      "Responses": {},
+      "Response": {
+        "Optional": false,
+        "AnyOfTypes": [],
+        "AnyOfCasesMeta": [],
+        "OneOfTypes": [],
+        "OneOfCasesMeta": [],
+        "NotTypes": [],
+        "NotCasesMeta": [],
+        "Type": "Void",
+        "IsSdlNativeType": true,
+        "Constant": false,
+        "IsStream": false,
+        "IsAttribute": false,
+        "Examples": [],
+        "Nullable": false,
+        "ReadOnly": false,
+        "WriteOnly": false,
+        "IsArray": false,
+        "IsMap": false,
+        "IsArrayOfMap": false,
+        "Deprecated": false,
+        "Name": "Response",
+        "DefaultValue": ""
+      },
+      "HasOptionalQueryParams": false,
+      "HasOptionalFieldParams": false,
+      "CollectParameters": false,
+      "Parameters": [
+        {
+          "ParamFormat": "Query",
+          "Optional": false,
+          "AnyOfTypes": [],
+          "AnyOfCasesMeta": [],
+          "OneOfTypes": [],
+          "OneOfCasesMeta": [],
+          "NotTypes": [],
+          "NotCasesMeta": [],
+          "Type": "Number",
+          "IsSdlNativeType": true,
+          "Constant": false,
+          "IsStream": false,
+          "IsAttribute": false,
+          "Example": "3",
+          "Examples": [],
+          "Nullable": false,
+          "ReadOnly": false,
+          "WriteOnly": false,
+          "IsArray": false,
+          "IsMap": false,
+          "IsArrayOfMap": false,
+          "Deprecated": false,
+          "Name": "id",
+          "Description": "",
+          "DefaultValue": ""
+        }
+      ],
+      "Errors": [],
+      "TestCases": [
+        {
+          "Name": "Test Facebook Webhook",
+          "Enabled": true,
+          "ShouldPass": true,
+          "InputParameters": [
+            {
+              "IsNull": false,
+              "Name": "id",
+              "Value": "3"
+            }
+          ],
+          "ExpectedStatus": "200",
+          "ExpectedHeaders": [],
+          "ExpectedHeadersAllowExtra": true,
+          "ExpectedBodyMatchMode": "NONE",
+          "ExpectedArrayOrderedMatching": false,
+          "ExpectedArrayCheckCount": false,
+          "ResponseMatchSchema": true
+        }
+      ],
+      "WrapBodyInObject": false,
+      "Deprecated": false,
+      "XmlRequest": false,
+      "XmlResponse": false
+    }
+  ],
+  "EndpointGroups": [
+    {
+      "Name": "Misc",
+      "Description": ""
+    }
+  ],
+  "CustomTypes": [],
+  "UserDefinedImportedTypes": [],
+  "GlobalTypeCombinators": {},
+  "CodeGenSettings": {
+    "SynchronyMode": "Asynchronous",
+    "ModelSerializationScheme": "Json",
+    "ArraySerialization": "Indexed",
+    "Nullify404": false,
+    "UseHttpMethodPrefix": false,
+    "UseModelPrefix": false,
+    "UseExceptionPrefix": true,
+    "UseEnumPrefix": true,
+    "UseControllerPrefix": true,
+    "UseConstructorsForConfig": false,
+    "Timeout": 0.0,
+    "AndroidUseAppManifest": false,
+    "iOSUseAppInfoPlist": false,
+    "iOSGenerateCoreData": false,
+    "CollapseParamsToArray": false,
+    "RunscopeEnabled": false,
+    "AndroidHttpClient": "ANDROID_OK",
+    "JavaHttpClient": "JAVA_OK",
+    "ObjCHttpClient": "UNIREST",
+    "CSharpHttpClient": "UNIREST",
+    "NodeHttpClient": "NODE_REQUEST",
+    "JavaUsePropertiesConfig": false,
+    "PHPHttpClient": "UNIREST",
+    "EnablePHPComposerVersionString": false,
+    "EnableGlobalUserAgent": true,
+    "EnableAdditionalModelProperties": false,
+    "PreserveParameterOrder": true,
+    "ValidateRequiredParameters": false,
+    "AppendContentHeaders": true,
+    "GenerateInterfaces": false,
+    "UseCommonSDKLibrary": false,
+    "ParameterArrayFormat": "ParamArrayWithIndex",
+    "SecurityProtocols": [
+      "Ssl3",
+      "Tls"
+    ],
+    "GenerateTravisConfig": false,
+    "GenerateCircleConfig": false,
+    "GenerateAppveyorConfig": false,
+    "GenerateJenkinsConfig": false,
+    "EnableLogging": false,
+    "EnableHttpCache": false,
+    "Retries": 0,
+    "RetryInterval": 1.0,
+    "BackoffFactor": 2.0,
+    "StatusCodesToRetry": [
+      408,
+      413,
+      429,
+      500,
+      502,
+      503,
+      504,
+      521,
+      522,
+      524
+    ],
+    "RequestMethodsToRetry": [
+      "GET",
+      "PUT"
+    ],
+    "UserConfigurableRetries": true,
+    "GenerateAdvancedDocs": true,
+    "DisableDocs": false,
+    "StoreTimezoneInformation": false,
+    "UnderscoreNumbers": true,
+    "UseSingletonPattern": true,
+    "IgnoreIfNullJson": false,
+    "DisableLinting": false,
+    "SortResources": false,
+    "LiftParameterDescriptionFromCustomType": false,
+    "AllowSkippingSSLCertVerification": false,
+    "ApplyCustomizations": [],
+    "DoNotSplitWords": [],
+    "ReturnCompleteHttpResponse": false,
+    "ThrowForHttpErrorStatusCodes": true,
+    "GenerateModels": true,
+    "GenerateEnums": true,
+    "GenerateExceptions": true,
+    "ResponseMapping": {
+      "Type": "Simple"
+    },
+    "ForceKeywordArgsInRuby": false,
+    "SymbolizeHashKeysInRuby": false,
+    "UsageExampleEndpoint": {
+      "Description": "",
+      "EndpointGroupName": "",
+      "EndpointName": ""
+    },
+    "IsLatestVersion": false,
+    "CustomDependencies": [],
+    "EnableImmutableModels": false,
+    "UseEndpointMethodName": false,
+    "EncodeTemplateParameters": true,
+    "GenerateExamplesForOptionalFields": false,
+    "MultitargetDotnetVersions": false,
+    "BackoffMax": 0.0,
+    "RetryOnTimeout": true,
+    "EnableCookies": false,
+    "EnableJsonPassThroughForAny": false
+  },
+  "Errors": [],
+  "TestGenSettings": {
+    "Configuration": {},
+    "TestTimeout": 30,
+    "PrecisionDelta": 0.01
+  },
+  "Roles": [],
+  "Namespaces": [],
+  "ExportSettings": {
+    "ExportExtensions": false,
+    "UseDateTimeOnlyInRaml": false,
+    "SetPostmanParamValuesAsVariables": false,
+    "WrapResponseFieldInWsdl": true,
+    "AllowEmptyTypeAttributesInXsd": false,
+    "WrapInputOutputTypesInElementInXsd": false,
+    "AddRefSiblingDataInAllOfSchema": false,
+    "EncodeUrlParamsInPostman": true,
+    "UseXsdBase64BinaryType": false,
+    "ExportXmlMetaData": true,
+    "ExportDiscriminatorMappingValues": true,
+    "ExportGlobalTypeCombinators": true,
+    "ExportAnyType": true,
+    "ExportOptionalParametersAsDisabled": false,
+    "ExportApiKeyAuthInPostman": true,
+    "GenerateSampleValueFromRegexPattern": false,
+    "UseHttpMethodPrefixForAutoGeneratedWsdlNames": true
+  }
+}
