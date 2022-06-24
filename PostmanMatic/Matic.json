@@ -93,6 +93,33 @@
           "Name": "id",
           "Description": "",
           "DefaultValue": ""
+        },
+        {
+          "ParamFormat": "Body",
+          "Optional": false,
+          "AnyOfTypes": [],
+          "AnyOfCasesMeta": [],
+          "OneOfTypes": [],
+          "OneOfCasesMeta": [],
+          "NotTypes": [],
+          "NotCasesMeta": [],
+          "Type": "Test Facebook Webhook Request",
+          "IsSdlNativeType": false,
+          "Constant": false,
+          "IsStream": false,
+          "IsAttribute": false,
+          "Example": "{\r\n  \"Hello\": \"World\"\r\n}",
+          "Examples": [],
+          "Nullable": false,
+          "ReadOnly": false,
+          "WriteOnly": false,
+          "IsArray": false,
+          "IsMap": false,
+          "IsArrayOfMap": false,
+          "Deprecated": false,
+          "Name": "Body",
+          "Description": "",
+          "DefaultValue": ""
         }
       ],
       "Errors": [],
@@ -106,6 +133,11 @@
               "IsNull": false,
               "Name": "id",
               "Value": "13"
+            },
+            {
+              "IsNull": false,
+              "Name": "Body",
+              "Value": "{\r\n  \"Hello\": \"World\"\r\n}"
             }
           ],
           "ExpectedStatus": "200",
@@ -129,7 +161,45 @@
       "Description": ""
     }
   ],
-  "CustomTypes": [],
+  "CustomTypes": [
+    {
+      "Name": "Test Facebook Webhook Request",
+      "ImplementationType": "Structure",
+      "Fields": [
+        {
+          "Optional": false,
+          "AnyOfTypes": [],
+          "AnyOfCasesMeta": [],
+          "OneOfTypes": [],
+          "OneOfCasesMeta": [],
+          "NotTypes": [],
+          "NotCasesMeta": [],
+          "Type": "String",
+          "IsSdlNativeType": true,
+          "IsTypeJsonObject": false,
+          "Constant": false,
+          "IsStream": false,
+          "IsAttribute": false,
+          "Examples": [],
+          "Attributes": {},
+          "Nullable": false,
+          "ReadOnly": false,
+          "WriteOnly": false,
+          "IsArray": false,
+          "IsMap": false,
+          "IsArrayOfMap": false,
+          "Deprecated": false,
+          "Name": "Hello",
+          "Description": "",
+          "DefaultValue": ""
+        }
+      ],
+      "ExampleValue": "{\"Hello\":\"World\"}",
+      "ExampleValues": [],
+      "Deprecated": false,
+      "IsXmlType": false
+    }
+  ],
   "UserDefinedImportedTypes": [],
   "GlobalTypeCombinators": {},
   "CodeGenSettings": {
