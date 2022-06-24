@@ -34,7 +34,7 @@
     {
       "AuthenticateEndpointWith": [],
       "Name": "Test Facebook Webhook",
-      "HTTPMethod": "GET",
+      "HTTPMethod": "POST",
       "Group": "Misc",
       "RequiresAuthentication": true,
       "Route": "/webhook",
